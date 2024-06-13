@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+
+# Part 1 (config file metadata)
+metadata:
+  name: nginx-service
+
+# Part 2 (config file specification / every kind of config in that component)
+# In the spec section each attribute will be specific to the kind (service / deployment...)
+spec:
+  selector:
+    # Making the connection with the deployment and its pods
+    # Also the service must know the pods relate it to it
+    app: nginx
+  ports:
+    - protocol: TCP
+      # The port that the service is going to use to listen for upcoming requests
+      port: 80 
+      # The container port. The service is going to forward the request to the container port
+      targetPort: 8080
+
+# Part 3 (status which is automatically generated and created by kubernetes)
+# Kubernetes is going to compare the actual state with the desired state defined in the spec section
+# to determine if there are any pods to kill or to create => strong self-healing mechanism provided by kubernetes
+# the etcd holds the status of all the K8S components. This is from where K8S gets the actual status

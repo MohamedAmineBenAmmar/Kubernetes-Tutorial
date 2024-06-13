@@ -1,0 +1,10 @@
+# Creating a config map that is going to hold the name of the service
+# that acts as the point that allow us to interact with the mongodb database
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-configmap
+data:
+  # mongodb-service is the name of the internal service that will allow us to interact with
+  # the mongodb
+  database_url: mongodb-service

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+
+# Metadata for the deployment config file
+metadata:
+  name: nginx-deployment
+  # Defining a key value pairs
+  labels:
+    # It can be any key value pair
+    # This is the label of the deployment / this label will be used by the service selector
+    app: nginx
+
+# Specification for the deployment
+spec:
+  replicas: 2
+  selector:
+    # Match every pod with the label (app: nginx) to the current deployment
+    matchLabels:
+      app: nginx
+
+  # Defining a template for the pods
+  # The template has its own metadata and specification
+  template:
+    # metadata + spec are applied to pods
+    metadata:
+      labels:
+        app: nginx
+    # Blueprint for the pod
+    spec: 
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        ports:
+        # The port that the container is listening to
+        - containerPort: 8080
+

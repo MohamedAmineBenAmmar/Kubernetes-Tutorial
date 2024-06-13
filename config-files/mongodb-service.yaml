@@ -1,0 +1,12 @@
+# Creation of an internal service so that other services can talk to the mongodb service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

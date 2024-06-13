@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-service
+spec:
+  selector:
+    app: mongo-express
+  
+  # The type LoadBalancer assigns service an external IP address and so accespts external requests
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8081
+      # Also to make this service external we add this attribute nodePort
+      # The port where the external IP address will be open
+      # The port that is going to be written in the browser to access the external service
+      # This port has a range 30000-32767
+      nodePort: 30000
